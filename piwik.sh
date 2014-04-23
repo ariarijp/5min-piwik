@@ -22,12 +22,12 @@ apt-get update
 apt-get install -y apache2 mysql-server php5 php5-mysql php5-gd libfreetype6 unzip curl
 service apache2 restart
 chown -R vagrant.vagrant /var/www
-wget https://github.com/piwik/piwik/archive/master.zip
-unzip master.zip
+wget -nv https://github.com/piwik/piwik/archive/master.zip
+unzip -q master.zip
 mv piwik-master /var/www/piwik
 cd /var/www/piwik
 curl -sS https://getcomposer.org/installer | php
-php composer.phar install
+php composer.phar -q install
 chown -R www-data:www-data /var/www/piwik
 chmod -R 0755 /var/www/piwik/tmp
 echo "CREATE DATABASE piwik;" | mysql -u root -p$MYSQL_ROOT_PASSWORD
